@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import ToDoApp from './components/todo/ToDoApp'
 
 import './App.css';
 /*import FirstComponent from './components/learning-examples/FirstComponent'
@@ -11,7 +12,11 @@ class App extends Component
 {
   render(){
     return(
-    <Counter/>
+      <div className="App">
+    {/* <Counter/>*/}
+    <ToDoApp/>
+    </div>
+
           );
   }
 }
