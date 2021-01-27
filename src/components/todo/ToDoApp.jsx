@@ -1,14 +1,37 @@
 import React, {Component} from 'react'
+import {BrowserRouter as Router, Route, Switch} from 'react-router-dom'
 
-class ToDoApp extends Component {
+class ToDoApp extends Component { //certain situations will call for logincomponent or welcomecomponent
+    //use react-route to do this, can probably do this to display modals as well? not sure, must look at MenteeBook
+    //the exact keyword below ensures that the default path in the DOM nav routing is not always shown on the webpage. For example, WelcomeComponent is not always shown
     render(){
         return(
             <div className="todoapp">
-                <LoginComponent></LoginComponent>
+                <Router>
+                    <>
+                    <Switch>
+                        <Route path ="/" exact component={LoginComponent}/>
+                        <Route path ="/login" exact component={LoginComponent}/>
+                        <Route path ="/welcome" exact component={WelcomeComponent}/>
+                        <Route component={ErrorComponent}/>
+                    </Switch>
+                    </>
+                </Router>
+               {/*<LoginComponent></LoginComponent>*/}
             </div>
         )
     }
 }
+class WelcomeComponent extends Component {
+    render(){
+        return <div>Welcome in28minutes</div>
+    }
+}
+
+function ErrorComponent(){
+    return<div>An error occured. I don't know what to do! Contact support at abcd-efgh-ijkl</div>
+}
+
 class LoginComponent extends Component{ //surround it in a div or empty fragment
     
     constructor(props){
@@ -49,8 +72,9 @@ loginClicked(){
     //in28minutes,dummy
     if(this.state.username==='in28minutes' && this.state.password==='dummy')
     {
-    this.setState({showSuccessMessage:true})
-    this.setState({hasLoginFailed:false})
+    this.props.history.push("/welcome")
+    // this.setState({showSuccessMessage:true})
+    // this.setState({hasLoginFailed:false})
     console.log('Successful')
     }
     else //if invalid credentials are entered, set the SuccessMessage to false and LoginFailed to true
