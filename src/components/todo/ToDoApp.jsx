@@ -7,6 +7,7 @@ import Form from 'react-bootstrap/Form'
 import NavDropdown from 'react-bootstrap/NavDropdown'
 import FormControl from 'react-bootstrap/FormControl'
 import Button from 'react-bootstrap/Button'
+import AuthenticationService from './AuthenticationService.js'
 
 class ToDoApp extends Component { //certain situations will call for logincomponent or welcomecomponent
     //use react-route to do this, can probably do this to display modals as well? not sure, must look at MenteeBook
@@ -54,10 +55,11 @@ class ListToDosComponent extends Component{ //figure out how to iterate the id a
         return ( 
               <div>
                         <h1>List Todos</h1>
-                            <table>
+                        <div className="d-flex">
+                            <table className="table">
                                 <thead>
                                 <tr>
-                                <th>id</th>
+                                
                                 <th>description</th>
                                 <th>Is Completed</th>
                                 <th>Target Date</th>
@@ -69,7 +71,7 @@ class ListToDosComponent extends Component{ //figure out how to iterate the id a
                                                 this.state.todos.map ( //iterate each todo over its own <tr> table row
                                                     todo =>
                                                     <tr>
-                                                    <td>{todo.id}</td>
+                                                   {/**  <td>{todo.id}</td>*/}
                                                     <td>{todo.description}</td>
                                                     <td>{todo.done.toString()}</td>
                                                     <td>{todo.targetDate.toString()}</td>
@@ -80,17 +82,26 @@ class ListToDosComponent extends Component{ //figure out how to iterate the id a
                                         
                                     </tbody>
                             </table>
+                            </div>
               </div>
               );
     }
 }
 
 class WelcomeComponent extends Component { //the below function displays the name of user
-    render(){
-        return (
-                    <div>Welcome {this.props.match.params.name} You can manage your todos <Link to="/todos">here</Link></div>
-               )
-    }
+    render()  {
+                return(
+                         /*<div>Welcome {this.props.match.params.name} You can manage your todos <Link to="/todos">here</Link></div>*/
+                            <>
+                            <h1>Welcome!</h1>
+                            <div className="container">
+                            Welcome {this.props.match.params.name} You can manage your todos <Link to="/todos">here</Link>
+                            </div>
+                            </>
+               
+                      )
+
+              }
 }
 
 class HeaderComponent extends Component {
@@ -109,7 +120,7 @@ class HeaderComponent extends Component {
       
         <Nav.Link href="/todos">ToDos</Nav.Link>
         <Nav.Link href="/login">Login</Nav.Link>
-        <Nav.Link href="/logout">Logout</Nav.Link>
+        <Nav.Link href="/logout" onClick={AuthenticationService.logout}>Logout</Nav.Link>
         
         <NavDropdown.Divider />
         <Nav.Link href="#action/3.4">Separated link</Nav.Link>
@@ -188,10 +199,11 @@ loginClicked(){
     //in28minutes,dummy
     if(this.state.username==='in28minutes' && this.state.password==='dummy')
     {
+    AuthenticationService.registerSuccessfulLogin(this.state.username, this.state.password);
     this.props.history.push(`/welcome/${this.state.username}`)
     // this.setState({showSuccessMessage:true})
     // this.setState({hasLoginFailed:false})
-    console.log('Successful')
+    console.log('Successful Login')
     }
     else //if invalid credentials are entered, set the SuccessMessage to false and LoginFailed to true
     {
@@ -206,13 +218,16 @@ loginClicked(){
     render(){
         return(
             <div> 
-            {/*<ShowInvalidCredentials hasLoginFailed={this.state.hasLoginFailed}/>*/}
-               {this.state.hasLoginFailed && <div>Invalid Credentials</div>}
-               {this.state.showSuccessMessage && <div>Successful Login!</div>}
-              { /* <ShowValidCredentials showSuccessMessage={this.state.showSuccessMessage}/>*/}
-            User Name: <input type ="text" name="username" value={this.state.username} onChange={this.handleChange}/>
-            Password: <input type ="password" name="password" value={this.state.password} onChange={this.handleChange}/>
-            <button onClick={this.loginClicked}>Login</button>
+                <h1>Login</h1>
+                    <div className="container">
+                          {/*<ShowInvalidCredentials hasLoginFailed={this.state.hasLoginFailed}/>*/}
+                          {this.state.hasLoginFailed && <div className="alert alert-danger">Invalid Credentials</div>}
+                          {this.state.showSuccessMessage && <div>Successful Login!</div>}
+                          {/* add btn-success and alert-danger classes Bootstrap props <ShowValidCredentials showSuccessMessage={this.state.showSuccessMessage}/>*/}
+                          User Name: <input type ="text" name="username" value={this.state.username} onChange={this.handleChange}/>
+                          Password: <input type ="password" name="password" value={this.state.password} onChange={this.handleChange}/>
+                         <button className="btn btn-success" onClick={this.loginClicked}>Login</button>
+                    </div>
             </div>
         );
     }
