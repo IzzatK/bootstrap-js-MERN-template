@@ -1,3 +1,27 @@
 .hiddenText{
     color:orange;
 }
+.bluetext{
+    color:darkblue;
+}
+.text-muted{
+    color:darkblue;
+}
+.footer{
+    color:darkblue;
+    position:absolute;
+    left:-70px;
+    bottom: 0px;
+    width: 110%;
+    height: 40px;
+    background-color:orange;
+}
+
+@media (max-width: 576px){
+    .footer{
+        position:absolute;
+        left: -50px;
+        width: 110%;
+    }
+
+}

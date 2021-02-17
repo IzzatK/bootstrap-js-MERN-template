@@ -22,6 +22,7 @@ class ToDoApp extends Component { //certain situations will call for logincompon
                         <Route path ="/login" exact component={LoginComponent}/>
                         <Route path ="/welcome/:name" exact component={WelcomeComponent}/>
                         <Route path ="/todos" exact component={ListToDosComponent}/>
+                        <Route path ="/logout" exact component={LogoutComponent}/>
                         <Route component={ErrorComponent}/>
                     </Switch>
                     <FooterComponent/>
@@ -65,7 +66,7 @@ class ListToDosComponent extends Component{ //figure out how to iterate the id a
                                     <tbody>
                                         
                                             {
-                                                this.state.todos.map (
+                                                this.state.todos.map ( //iterate each todo over its own <tr> table row
                                                     todo =>
                                                     <tr>
                                                     <td>{todo.id}</td>
@@ -99,7 +100,7 @@ class HeaderComponent extends Component {
                         <header>
                         <Navbar className ="mb-5"bg="dark" expand="lg">
   <Navbar.Brand href="#home">React-Bootstrap</Navbar.Brand>
-  <p className =" hiddenText d-xs-none d-lg-none mr-5">Click the menu for site navigation</p>
+  <p className ="hiddenText d-xs-none d-lg-none mr-5">Click the menu icon for site navigation</p>
   <Navbar.Toggle aria-controls="basic-navbar-nav" />
   <Navbar.Collapse id="basic-navbar-nav">
     <Nav className="mr-auto">
@@ -108,7 +109,8 @@ class HeaderComponent extends Component {
       
         <Nav.Link href="/todos">ToDos</Nav.Link>
         <Nav.Link href="/login">Login</Nav.Link>
-        <Nav.Link href="#action/3.3">Logout</Nav.Link>
+        <Nav.Link href="/logout">Logout</Nav.Link>
+        
         <NavDropdown.Divider />
         <Nav.Link href="#action/3.4">Separated link</Nav.Link>
      
@@ -131,8 +133,10 @@ class FooterComponent extends Component {
     render(){
         return (
                     <div>
-                        <hr/>
-                        Footer
+                        <footer className="footer">
+                            <span className="text-muted"><p class="bluetext">Text Here</p></span>
+
+                        </footer>
                     </div>
                )
     }
@@ -214,6 +218,20 @@ loginClicked(){
     }
    
 }
+class LogoutComponent extends Component{
+    render(){ // need an extra surrounding empty div in JSX classes/obj
+        return(
+            <div> 
+<h1>You've now logged out</h1>
+<div className="container">
+    Thanks for using our App.
+</div>
+</div>
+        )
+    }
+}
+
+
 // function ShowInvalidCredentials(props){
 //         if(props.hasLoginFailed){
 //             return <div>Invalid Credentials</div>
