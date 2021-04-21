@@ -55,8 +55,8 @@ class ListToDosComponent extends Component{ //figure out how to iterate the id a
         return ( 
               <div>
                         <h1>List Todos</h1>
-                        <div className="d-flex">
-                            <table className="table">
+                        <div className="d-flex" id="table1">
+                            <table className="table" id="table1">
                                 <thead>
                                 <tr>
                                 

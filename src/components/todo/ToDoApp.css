@@ -1,3 +1,14 @@
+@media(max-width:500px)
+{
+    #table1
+    {
+        display:none;
+    }
+}
+/*  Media query works with Reactstrap!!! install React-Bootstrap and import the 
+    CDNs as done in this project              */
+
+
 .hiddenText{
     color:orange;
 }
