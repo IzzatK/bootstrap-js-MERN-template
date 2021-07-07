@@ -1,8 +1,10 @@
-@media(max-width:500px)
+@media(max-width:780px)
 {
     #table1
     {
-        display:none;
+        color:darkblue;
+        background-color:orange;
+        border:none;
     }
 }
 /*  Media query works with Reactstrap!!! install React-Bootstrap and import the 
